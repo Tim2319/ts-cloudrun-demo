@@ -1,12 +1,23 @@
+import "dotenv/config"
 import express, { Request, Response } from "express"
 import pricingRouter from "./routes/pricing"
+import checkoutRouter from "./routes/checkout"
+import materialRouter from "./routes/material"
 
 const app = express()
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 8080
 
 //Middlewares
 app.use(express.json())
+
+//material
+app.use("/api/materials", materialRouter)
+
+//pricing 
 app.use("/api/pricing", pricingRouter)
+
+//checkout
+app.use("/api/checkout", checkoutRouter)
 
 //Health check 
 app.get("/health", (req: Request, res:Response) => {
