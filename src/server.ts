@@ -19,6 +19,7 @@ app.get("/api/materials", (req:Request, res: Response) => {
     const materials = [
         { id:1, name: "Concrete", price: 100 },
         { id:2, name: "Steel", price: 200 },
+        { id:3, name: "Wood", price: 150 }
     ]
     res.json(materials)
 })
