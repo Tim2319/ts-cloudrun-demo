@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "commonjs",              // 用 CommonJS，配合現在的 node 執行方式
+    "rootDir": "src",
+    "outDir": "dist",
+
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+
+    "resolveJsonModule": true,         // 允許 import "../pricing.json"
+    "moduleResolution": "node",        // 搭配上面這行，修掉你看到的錯誤
+    "types": ["node"]       
+},
+  "include": ["src"]
+}
