@@ -1,14 +1,20 @@
-import fs from "fs"
-import path from "path"
+import pricingFromFile from "../pricing.json";
 
-const pricingPath = path.join(process.cwd(), "src", "pricing.json")
+export type Pricing = Record<string, number>;
 
-export const getPricing = () => {
-    const data = fs.readFileSync(pricingPath, "utf-8")
-    return JSON.parse(data)
+// 先把 JSON 當成初始值，放進一個可變的變數
+let currentPricing: Pricing = { ...pricingFromFile };
+
+export function getPricing(): Pricing {
+  return currentPricing;
 }
 
-export const updatePricing = (newPricing: any) => {
-    fs.writeFileSync(pricingPath, JSON.stringify(newPricing, null, 2))
-    return newPricing
+export function updatePricing(partial: Partial<Pricing>): Pricing {
+  // 合併新的價格進來（例如只傳 steel，就更新 steel）
+  currentPricing = {
+    ...currentPricing,
+    ...partial,
+  } as Pricing
+  
+  return currentPricing;
 }
